@@ -1,12 +1,14 @@
-name: "Rum"
+name: "Personal Website"
 output_dir: "."
 navbar:
-  title: "⭐"
-  left:
-    - text: "⭐"
+  title: "Jun Zhai"
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "Courseworks"
       href: about.html
 
 output:
   html_document:
-    theme: paper
+    theme: sandstone
     css: 'styles.css'

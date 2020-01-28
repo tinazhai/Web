@@ -1,11 +1,10 @@
 ---
-title: "Whisp*"
+title: "Courseworks"
 output: 
   html_document:
     toc: false
-    theme: paper
+    theme: sandstone
 ---
 
-### Don't say a word
 
-<img src="./B.jpg" style="width:75%">
+
