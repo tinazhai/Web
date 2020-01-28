@@ -1,12 +1,46 @@
 ---
-title: "Hush.."
+title: ""
 output: 
   html_document:
-    toc: false
-    theme: paper
+    toc: true
+    toc_float: true
+    theme: sandstone
 ---
+\
 
-### I know you can find here
+### Education
+**Columbia Univeristy**  
+Aug 2019 ~ May 2021 &emsp; Master of Science, Biostatistics                                                                                                                
+**Southeast Univeristy**  
+Aug 2015 ~ June 2019 &emsp; Bachelor of Engineering, Pharmaceutical Engineering   
+</br>
 
+### Work Experience  
+**Fizer China Inc.**							           	            	               
+Aug 2018 ~ Dec 2018 &emsp; Medical Affairs Intern   
 
-<img src="./A.jpg" style="width:75%">
+**SAI Med Partners LLC**					           	                                       
+Jan 2018 ~ Feb 2018 &emsp; Research Analyst Intern  
+</br>
+
+### Leadership & Activities  
+**Nnanjing Qinying Software Technology Co. LTD**                   
+Feb 2017 ~ Dec 2017 &emsp; Product Manager   				 				                               
+
+**SEU Career Center**	 
+Sep 2016 ~ Jun 2017 &emsp; New Media Operation  	
+
+**SEU Psychology Association**  
+Sep 2015 ~ Jun 2019 &emsp; Association Assistant       
+</br>
+
+### Skills & Interests   
+**Technical**    
+R; SAS; C++; LaTeX; Python; Microsoft Office; Adobe Photoshop; Adobe Lightroom     
+**Language**   
+Mandarin; English  
+**Interests**   
+Photography; Handcrafts   
+</br>
+
+👉**Full [CV](./CV.doc)**
