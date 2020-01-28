@@ -36,4 +36,4 @@ output:
 - Epidemiology  
 - Statistical Inference
 
-👉 [**Graduate transcript**](./fall transcript.pdf)
+👉 [**Graduate transcript**](./Jan eTranscript.pdf)

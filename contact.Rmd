@@ -1,0 +1,33 @@
+---
+title: ""
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float:      
+      toc_collapsed: true
+    toc_depth: 4
+    theme: sandstone
+---
+</br>
+
+### Email
+- tina_zhai@outlook.com
+- jz3181@columbia.edu  
+</br>
+
+### Address
+- 100 Haven Ave, New York, NY, 10032
+
+```{r include=FALSE}
+library(leaflet)
+library(dplyr)
+```
+
+```{r}
+leaflet() %>%
+  setView(lng=-73.943, lat=40.845, zoom=16 )%>%
+  addTiles() %>%
+  addMarkers(lng=-73.943, lat=40.845, popup = "Columbia University Medical Center" )
+```
+
