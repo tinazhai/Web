@@ -3,7 +3,9 @@ title: ""
 output: 
   html_document:
     toc: true
-    toc_float: true
+    toc_float:      
+      toc_collapsed: true
+    toc_depth: 4
     theme: sandstone
 ---
 \
@@ -43,4 +45,4 @@ Mandarin; English
 Photography; Handcrafts   
 </br>
 
-👉**Full [CV](./CV.doc)**
+👉 **Full [CV](./CV.doc)**

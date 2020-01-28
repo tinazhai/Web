@@ -1,10 +1,39 @@
 ---
-title: "Courseworks"
+title: ""
 output: 
   html_document:
-    toc: false
+    toc: true
+    toc_float:      
+      toc_collapsed: true
+    toc_depth: 4
     theme: sandstone
 ---
+</br>
+
+### Undergraduate
+
+#### Research
+- The antitumor effect and mechanism of a novel platinum(Ⅳ)-immune inhibitor complex.  
+- The study of anti-tumor components in Buddlejaasiatica.  
 
 
+#### Courseworks  
+- Medicinal Chemistry    
+- Physiological Pharmacology    
+- Pharmacy  
+- Organic Chemistry  
+- Biochemistry  
 
+👉 [**Undergraduate transcript**](./Undergrad transcript.pdf)
+
+</br>
+
+### Graduate
+
+#### Courseworks
+- Probability  
+- Biostatistical Methods  
+- Epidemiology  
+- Statistical Inference
+
+👉 [**Graduate transcript**](./fall transcript.pdf)
