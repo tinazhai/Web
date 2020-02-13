@@ -16,9 +16,12 @@ output:
 
 ### Gender Pay Gap
 This is a group project for course P8130, analyzing the dataset [Lawsuit](Lawsuit.csv) with statistical methods, and draw a conclusion on gender pay gap issue.
+</br>
 
 #### Final Report
 <embed src="./Group15_Final Report 3.0.pdf" type="application/pdf"   height="500px" width="700">
+
+</br>
 
 #### R Code
 Below is the r code and outputs for this project.

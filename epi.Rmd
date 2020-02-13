@@ -16,10 +16,13 @@ output:
 
 ### Gun-ownership and Homicides
 This is a group work project for course P6400, anaylizing the article [Gun ownership as a risk factor for homicide in the home (Kellermann et al., 1993)](https://www.nejm.org/doi/full/10.1056/NEJM199310073291506) from epidimeological angles.
+</br>
 
 #### Final Report
 
 <embed src="./Seminar 2_Final Group project.pdf" type="application/pdf"   height="500px" width="700">
+
+</br>
 
 #### Presentation Slides
 
