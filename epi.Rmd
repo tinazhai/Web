@@ -1,0 +1,28 @@
+---
+title: ""
+pagetitle: Jun Zhai - Gun-ownership and Homicides
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float:      
+      toc_collapsed: true
+    toc_depth: 4
+    theme: sandstone
+
+---
+<title>Jun Zhai - Gun-ownership and homicides</title>
+</br>
+
+### Gun-ownership and Homicides
+This is a group work project for course P6400, anaylizing the article [Gun ownership as a risk factor for homicide in the home (Kellermann et al., 1993)](https://www.nejm.org/doi/full/10.1056/NEJM199310073291506) from epidimeological angles.
+
+#### Final Report
+
+<embed src="./Seminar 2_Final Group project.pdf" type="application/pdf"   height="500px" width="700">
+
+#### Presentation Slides
+
+<embed src="./epi.pdf" type="application/pdf"   height="500px" width="700">
+
+

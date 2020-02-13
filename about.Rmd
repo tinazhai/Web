@@ -8,6 +8,7 @@ output:
       toc_collapsed: true
     toc_depth: 4
     theme: sandstone
+
 ---
 <title>Jun Zhai - Courseworks</title>
 </br>
@@ -37,5 +38,7 @@ output:
 - Biostatistical Methods  
 - Epidemiology  
 - Statistical Inference
+- SAS Programming
+- Randomized Clinical Trials
 
 👉 [**Graduate transcript**](./Jan eTranscript.pdf)

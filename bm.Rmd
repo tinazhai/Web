@@ -1,0 +1,400 @@
+---
+title: ""
+pagetitle: Jun Zhai - Gender Pay Gap
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float:      
+      toc_collapsed: true
+    toc_depth: 4
+    theme: sandstone
+
+---
+<title>Jun Zhai - Gender Pay Gap</title>
+</br>
+
+### Gender Pay Gap
+This is a group project for course P8130, analyzing the dataset [Lawsuit](Lawsuit.csv) with statistical methods, and draw a conclusion on gender pay gap issue.
+
+#### Final Report
+<embed src="./Group15_Final Report 3.0.pdf" type="application/pdf"   height="500px" width="700">
+
+#### R Code
+Below is the r code and outputs for this project.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(arsenal)
+library(MASS)
+library(HH)
+library(leaps)
+library(corrplot)
+library(broom)
+library(patchwork)
+library(GGally)
+library(ggrepel)
+library(xtable)
+library(table1)
+library(kableExtra)
+library(stargazer)
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+knitr::opts_chunk$set(
+    echo = TRUE,
+    warning = FALSE,
+  out.width = "80%"
+)
+options(xtable.floating = FALSE)
+options(xtable.timestamp = "")
+```
+
+**Data cleaning**
+```{r}
+df = read.csv("./Lawsuit.csv")%>%
+  janitor::clean_names() %>%
+  mutate(dept = factor(dept,labels=c("biochemistry/molecular biology","physiology","genetics","pediatrics","medicine","surgery")),
+         gender = factor(gender,labels=c("female","male")),
+         clin = factor(clin,labels=c("primarily research emphasis","primarily clinical emphasis")),
+         cert = factor(cert,labels=c("not certified","Board certified")),
+         rank = factor(rank,labels=c("assistant","associate","full professor")))
+```
+
+**Descriptive table of data**
+```{R}
+my.render.cont <- function(x) {
+  with(stats.apply.rounding(stats.default(x), digits.pct = 2,
+                            digits=7),
+       c("","Mean (SD)"=sprintf("%s (&plusmn; %s)", MEAN, SD),
+         "Median "=sprintf("%s", MEDIAN),
+         "Range"=sprintf("%s~%s",MIN,MAX)))
+}
+my.render.cat <- function(x) {
+  c("", sapply(stats.default(x), function(y) with(y,
+                                                  sprintf("%d (%0.0f %%)", FREQ, PCT))))
+}
+
+df%>%
+  rename("salary in 95" = sal95, "salary in 94" = sal94) %>%
+  table1(~`salary in 94`+`salary in 95`+prate+exper+rank+clin+cert+dept|gender,
+                 data=.,topclass="Rtable1-zebra",
+                 render.continuous=my.render.cont,
+                 render.categorical=my.render.cat)
+```
+
+**Data distribution**
+```{r }
+distribution94 = ggplot(aes(x=sal94),data=df)+
+  geom_histogram(aes(y = ..density..,,fill=..density..),color = "black", bins = 30, alpha = 0.7) +
+  scale_fill_gradient(low="#99cfbe", high="#0b69db") +
+  labs(title = "1994", x="Salary, $", y="Density") +
+  scale_x_continuous(labels = function(x) format(x, scientific = FALSE)) +
+  theme(plot.title = element_text(hjust = 0, size = 12), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none")
+distribution95 = ggplot(aes(x=sal95),data=df)+
+  geom_histogram(aes(y = ..density..,,fill=..density..),color = "black", bins = 30, alpha = 0.7) +
+  scale_fill_gradient(low="#ede577", high="#fca205") +
+  labs(title = "1995", x="Salary, $", y="Density") +
+  scale_x_continuous(labels = function(x) format(x, scientific = FALSE)) +
+  theme(plot.title = element_text(hjust = 0, size = 12), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none")
+distribution94 + distribution95 + plot_annotation(
+  title = "Figure 1. Salary Distribution by year",
+  theme = theme(
+    plot.title = element_text(size = 14,hjust = 0.1)
+  )
+)
+
+salary_94 = ggplot(aes(x=sal94),data=df)+
+  geom_histogram(aes(y = ..density..,,fill=..density..),color = "black", bins = 30, alpha = 0.7) +
+  scale_fill_gradient(low="#99cfbe", high="#0b69db") +
+  labs(title = "1994", x="Salary, $", y="Density") +
+  scale_x_continuous(labels = function(x) format(x, scientific = FALSE)) +
+  theme(plot.title = element_text(hjust = 0, size = 12), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none")+
+  facet_grid(~gender)
+salary_95 = ggplot(aes(x=sal95),data=df)+
+  geom_histogram(aes(y = ..density..,,fill=..density..),color = "black", bins = 30, alpha = 0.7) +
+  scale_fill_gradient(low="#ede577", high="#fca205") +
+  labs(title = "1995", x="Salary, $", y="Density") +
+  scale_x_continuous(labels = function(x) format(x, scientific = FALSE)) +
+  theme(plot.title = element_text(hjust = 0, size = 12), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none")+
+  facet_grid(~gender)
+salary_94 + salary_95 + plot_annotation(
+  title = "salary distribution in female and male group",
+  theme = theme(
+    plot.title = element_text(size = 14,hjust = 0.1)
+  )
+)
+
+```
+
+**Transformation**
+```{r}
+fit_0 = lm(sal95~factor(gender)+factor(dept)+factor(rank)+exper+factor(cert)+factor(clin),data=df)
+##this plot shouldn't be putted in article, instead, annotate it with word.
+boxcox(fit_0,data=df)
+df=
+  df %>%
+  mutate(salary=(sal94+sal95)/2,
+         ln_salary = log(salary))
+
+distributionall = df %>%
+  ggplot(aes(x=salary),data=.)+
+    geom_histogram(aes(y = ..density..,,fill=..density..), ,color = "black", bins = 30, alpha = 0.7) +
+    scale_fill_gradient(low="#99cfbe", high="#0b69db") +
+    labs(title = "Summary of 1994 and 1995", x="Salary, $", y="Density") +
+    scale_x_continuous(labels = function(x) format(x, scientific = FALSE)) +
+    theme(plot.title = element_text(hjust = 0, size = 12), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none")
+distributionlog = df %>%
+  ggplot(aes(x=ln_salary),data=.)+
+    geom_histogram(aes(y = ..density..,,fill=..density..), ,color = "black", bins = 30, alpha = 0.7) +
+    scale_fill_gradient(low="#ede577", high="#fca205") +
+    labs(title = "Natural Logarithm of summary", x="ln(Salary)", y="Density") +
+    scale_x_continuous(labels = function(x) format(x, scientific = FALSE)) +
+    theme(plot.title = element_text(hjust = 0, size = 12), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none")
+distributionall + distributionlog + plot_annotation(
+  title = "Figure 2. Transformation of Salary",
+  theme = theme(
+    plot.title = element_text(size = 14,hjust = 0.1)
+  )
+)
+```
+
+**A glance of data**
+```{r}
+df%>%ggplot(aes(x = id, y = salary)) +
+  geom_point(aes(color = gender,shape=rank), alpha = .5)+
+  labs(x="ID",y="Average Salary of 94 & 95")+  
+  geom_smooth(method=lm, aes(fill=gender))
+```
+
+**Unadjusted gender pay gap**
+```{r}
+fit_unadjueted = lm(ln_salary~factor(gender),data=df)
+tab_model(fit_unadjueted)
+```
+
+**Correlation**
+```{r message=FALSE}
+df2 = read.csv("./Lawsuit.csv")%>%
+  janitor::clean_names() %>%
+    mutate(salary=(sal94+sal95)/2,
+         ln_salary = log(salary))
+cor_data =
+  cor(cbind(ln_salary = pull(df2,ln_salary),
+        model.matrix(ln_salary ~ gender+dept+rank+exper+cert+clin+prate, df2)[,-1])
+  )
+cor_data %>%
+  corrplot(method = "color", addCoef.col = "black",
+           type = "lower", tl.col = "black", tl.srt = 45,
+           insig = "blank" , number.cex = 0.7,
+           diag = FALSE)
+```
+
+*Strong correlation between dept and prate, clin between prate, consider to remove prate.*
+
+**Confounder**
+```{r fig.height = 4}
+fit1 = lm(ln_salary~factor(gender),data=df) %>% summary()
+fit2 = lm(ln_salary~factor(gender)+factor(dept),data=df)
+fit3 = lm(ln_salary~factor(gender)+factor(clin),data=df)
+fit4 = lm(ln_salary~factor(gender)+factor(cert),data=df)
+fit6 = lm(ln_salary~factor(gender)+exper,data=df)
+fit7 = lm(ln_salary~factor(gender)+factor(rank),data=df)
+rbind(
+  tidy(fit2)[2,2],
+  tidy(fit3)[2,2],
+  tidy(fit4)[2,2],
+  tidy(fit6)[2,2],
+  tidy(fit7)[2,2])%>%
+  cbind(confounder = c("dept","clin","cert","exper","rank"))%>%
+  mutate(
+    different = (estimate-tidy(fit1)[2,2][[1]])/tidy(fit1)[2,2][[1]])%>%
+  dplyr::select(confounder,estimate,different) %>%
+  ggplot(aes(y = estimate, x = confounder)) +
+    theme_bw() +
+    geom_point(size = 4, color = "#fca205") +
+    labs(title = "Figure 4.Identification of Confounder", y = "adjusted estimate", x = "potential confounders", caption = "10 % change-in-estimate (CIE) criterion is used in recognizing confounder") +
+    theme(plot.title = element_text(hjust = 0, size = 12), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none") +
+    annotate("rect", xmin = 0.3, xmax = 5.7, ymin = tidy(fit1)[2,2][[1]]*0.9, ymax = tidy(fit1)[2,2][[1]]*1.1, fill = "#99cfbe", alpha = 0.5)
+```
+
+*dept, clin, cert,rank and exper are confounders.*
+
+**Interaction**
+```{r fig.height = 4, fig.width= 6}
+fit_1 = lm(ln_salary~factor(gender)+factor(dept)+exper+factor(cert)+factor(clin)+factor(rank),data=df)
+fit_2 = lm(ln_salary~factor(gender)*factor(dept)+exper+factor(cert)+factor(clin)+factor(rank),data=df)
+fit_3 = lm(ln_salary~factor(gender)*factor(clin)+exper+factor(cert)+factor(dept)+factor(rank),data=df)
+fit_4 = lm(ln_salary~factor(gender)*factor(cert)+exper+factor(clin)+factor(dept)+factor(rank),data=df)
+fit_6= lm(ln_salary~factor(gender)*exper+factor(rank)+factor(cert)+factor(clin)+factor(dept),data=df)
+fit_7 = lm(ln_salary~factor(gender)*factor(rank)+exper+factor(cert)+factor(clin)+factor(dept),data=df)
+a1= anova(fit_2,fit_1) %>% tidy() %>% as.data.frame() %>% .[2,]
+a2= anova(fit_3,fit_1) %>% tidy() %>% as.data.frame() %>% .[2,]
+a3= anova(fit_4,fit_1) %>% tidy() %>% as.data.frame() %>% .[2,]
+a4= anova(fit_6,fit_1) %>% tidy() %>% as.data.frame() %>% .[2,]
+a5= anova(fit_7,fit_1) %>% tidy() %>% as.data.frame() %>% .[2,]
+anova_table = bind_rows(a1,a2,a3,a4,a5) %>%
+  dplyr::select(-res.df) %>%
+  mutate(interaction = c("dept","clin","cert","exper","rank")) %>%
+  dplyr::select(interaction,everything()) 
+tibble(
+  term = c("rss","df","sumsq","statistic","p.value"),
+  dept = as.numeric(filter(anova_table, interaction == "dept")[,c(2:6)]),
+  clin = as.numeric(filter(anova_table, interaction == "clin")[,c(2:6)]),
+  cert = as.numeric(filter(anova_table, interaction == "cert")[,c(2:6)]),
+  exper = as.numeric(filter(anova_table, interaction == "exper")[,c(2:6)]),
+  rank = as.numeric(filter(anova_table, interaction == "rank")[,c(2:6)])
+) %>%
+  kable(.,"html", caption = "Table 2. Identification of interaction") %>%
+  kable_styling(c("striped", "bordered"),full_width = F, stripe_color = "gray!10", position = "left", font_size = 12) %>%
+  add_header_above(c(" " = 1, "interaction" = 5))
+```
+
+*Interaction between gender and rank,gender and exper is significant, keep it.*
+
+**Model selection**
+```{r}
+fit=lm(ln_salary~factor(gender)*factor(rank)+factor(gender)*exper+factor(dept)+factor(clin)+factor(cert),data=df)
+fit %>% summary()
+table_fin = kable(xtable(fit), "html", caption = "Table 3. Regressoin model of salary vs gender, EMM, confounder")
+kable_styling(table_fin, "striped", full_width = F, stripe_color = "gray!10", position = "left", font_size = 12)
+par(mfrow = c(2,2))
+plot(fit)
+```
+
+**Outlier**
+```{r}
+influential = influence.measures(fit)$infmat %>%
+  as.data.frame() %>%
+  dplyr::select(cook.d,dffit) %>%
+  mutate(`case id` = c(1:261)) %>%
+  dplyr::select(`case id`, everything())
+
+cook_plot = ggplot(aes(x = `case id`, y = cook.d, color = cook.d), data = influential) +
+  geom_point(size = 2, alpha = 0.8) +
+  scale_color_gradientn(colors=c("darkred", "orange", "yellow")) +
+  labs(title = "cook's distance",y = NULL) +
+  theme(plot.title = element_text(hjust = 0, size =10), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none") +
+  geom_text_repel(
+    data = subset(influential, `case id` == 184),
+    aes(label = `case id`),
+    size = 3,
+    color = "black",
+    box.padding = unit(0.35, "lines"),
+    point.padding = unit(0.3, "lines")) +
+  theme(plot.title = element_text(hjust = 0.5))
+dffit_plot = influential %>%
+  mutate(dffit = abs(dffit)) %>%
+  ggplot(aes(x = `case id`, y = dffit, color = dffit)) +
+  geom_point(size = 2, alpha = 0.8) +
+  scale_color_gradientn(colors=c("darkred", "orange", "yellow")) +
+  labs(title = "DFFITS",y=NULL) +
+  theme(plot.title = element_text(hjust = 0, size = 10), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none") +
+  geom_text_repel(
+    data = subset(influential, `case id` == 184),
+    aes(label = `case id`),
+    size = 3,
+    color = "black",
+    box.padding = unit(0.35, "lines"),
+    point.padding = unit(0.3, "lines")) +
+  theme(plot.title = element_text(hjust = 0.5))
+dffit_plot + cook_plot + plot_annotation(
+  title = "Figure 5. Identification of influential point",
+  theme = theme(
+    plot.title = element_text(size = 14,hjust = 0.1)
+  )
+)
+```
+
+*One outlier 184,remove it.*
+
+**After drop 184:**
+```{r results="asis"}
+fit=df[-184,] %>%
+  lm(ln_salary~factor(gender)*factor(rank)+factor(clin)+factor(gender)*exper+factor(dept)+factor(cert),data=.)
+
+table_fin = kable(xtable(fit), "html", caption = "Table 4. Fitted Model after removing case 184")
+kable_styling(table_fin, "striped", full_width = F, stripe_color = "gray!10", position = "left", font_size = 12)
+par(mfrow = c(2,2))
+plot(fit)
+```
+
+**Stratification**
+```{r }
+rank_3 = df[-c(184),] %>%
+  mutate(ln_salary_full_professor = ln_salary) %>% 
+  dplyr::select(-ln_salary) %>% 
+  filter(rank == "full professor") %>%
+  lm(ln_salary_full_professor~factor(gender)*exper+factor(dept)+factor(cert)+factor(clin),data=.) 
+rank_2 = df[-c(184),] %>%
+  mutate(ln_salary_associate = ln_salary) %>% 
+  dplyr::select(-ln_salary) %>% 
+  filter(rank == "associate") %>%
+  lm(ln_salary_associate~factor(gender)*exper+factor(dept)+factor(cert)+factor(clin),data=.) 
+rank_1 = df[-c(184),] %>%
+  mutate(ln_salary_assistant = ln_salary) %>% 
+  dplyr::select(-ln_salary) %>% 
+  filter(rank == "assistant") %>%
+  lm(ln_salary_assistant~factor(gender)*exper+factor(dept)+factor(cert)+factor(clin),data=.) 
+
+strat = function(x) {
+ ifelse(x<6,1,ifelse(x<9,2,ifelse(x<14,3,4)))
+}
+
+dfs=df%>%
+  mutate(exper=as.factor(strat(exper)))
+
+exper_1 = dfs[-c(184),] %>%
+  mutate(ln_salary_exper_1 = ln_salary) %>% 
+  dplyr::select(-ln_salary) %>% 
+  filter(exper == "1") %>%
+  lm(ln_salary_exper_1~factor(gender)*factor(rank)+factor(clin)+factor(dept)+factor(cert),data=.) 
+exper_2 = dfs[-c(184),] %>%
+  mutate(ln_salary_exper_2 = ln_salary) %>% 
+  dplyr::select(-ln_salary) %>% 
+  filter(exper == "2") %>%
+  lm(ln_salary_exper_2~factor(gender)*factor(rank)+factor(dept)+factor(clin)+factor(cert),data=.) 
+exper_3 = dfs[-c(184),] %>%
+  mutate(ln_salary_exper_3 = ln_salary) %>% 
+  dplyr::select(-ln_salary) %>% 
+  filter(exper == "3") %>%
+  lm(ln_salary_exper_3~factor(gender)*factor(rank)+factor(clin)+factor(dept)+factor(cert),data=.) 
+exper_4 = dfs[-c(184),] %>%
+  mutate(ln_salary_exper_4 = ln_salary) %>% 
+  dplyr::select(-ln_salary) %>% 
+  filter(exper == "4") %>%
+  lm(ln_salary_exper_4~factor(gender)*factor(rank)+factor(dept)+factor(clin)+factor(cert),data=.) 
+
+tab_model(rank_3,rank_2,rank_1,exper_1,exper_2,exper_3,exper_4,title = "Figure 2.Identification of interaction")
+
+## plot
+plot_rank =
+  ggplot(aes(x = gender,y = ln_salary,colour = rank, fill =rank, group = rank),data = df[-184,])+
+    geom_point(position ="jitter",size =2,  alpha =0.4)+
+    geom_smooth(se = FALSE, fill ="lightgrey",method ="lm",alpha =0.6,size =1.2)+
+    scale_colour_viridis_d("Rank")+
+    scale_fill_viridis_d("Rank") +
+    labs(title = "Rank",y="salary") +
+    theme(plot.title = element_text(hjust = 0, size = 10), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none")
+
+plot_exper =
+  ggplot(aes(x = gender,y = ln_salary,colour = exper, fill =exper, group = exper),data = dfs[-184,])+
+    geom_point(position ="jitter",size =2,  alpha =0.4)+
+    geom_smooth(se = FALSE, fill ="lightgrey",method ="lm",alpha =0.6,size =1.2)+
+    scale_colour_viridis_d("Exper")+
+    scale_fill_viridis_d("Exper") +
+    labs(title = "Exper",y="salary") +
+    theme(plot.title = element_text(hjust = 0, size = 10), axis.text.x = element_text(size = 9), axis.title.x = element_text(size = 10), axis.text.y = element_text(size = 9), axis.title.y = element_text(size = 10), legend.position = "none")
+plot_exper + plot_rank + plot_annotation(
+  title = "Figure 6. Adjusted association of gender and salary",
+  theme = theme(
+    plot.title = element_text(size = 14,hjust = 0.1)
+  )
+)
+```
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+
+
+
