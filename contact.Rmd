@@ -33,3 +33,6 @@ leaflet() %>%
   addMarkers(lng=-73.943, lat=40.845, popup = "Columbia University Medical Center" )
 ```
 
+</br>
+</br>
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
