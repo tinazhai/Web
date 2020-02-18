@@ -8,7 +8,7 @@ navbar:
       href: https://www.linkedin.com/in/jun-z-a22803158/
   title: "Jun Zhai"
   right:
-    - text: "Home"
+    - text: "Resume"
       href: index.html
     - text: "Courseworks"
       href: about.html
