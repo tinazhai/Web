@@ -1,0 +1,28 @@
+---
+title: ""
+pagetitle: Jun Zhai - Heart Disease Risk
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float:      
+      toc_collapsed: true
+    toc_depth: 4
+    theme: sandstone
+
+---
+<title>Jun Zhai - Estimating Risk of Heart Disease with SAS</title>
+</br>
+
+### Heart Disease Risk with SAS
+This is a final project for course P6110, building logistic model to predict the risk of having heart disease with dozens of clinical test results, using the UCI data set [Heart Disease](https://archive.ics.uci.edu/ml/datasets/Heart+Disease).  
+The model is building in SAS. [original SAS code](SAS.sas)
+</br>
+
+#### Poster
+
+<embed src="./SAS.pdf" type="application/pdf"   height="500px" width="700">
+
+</br>
+</br>
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

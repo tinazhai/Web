@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Jun Zhai - Health Insurance Prediction</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/table1-1.0/table1_defaults.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Jun Zhai</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="https://github.com/tinazhai/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/jun-z-a22803158/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Resume</a>
+</li>
+<li>
+  <a href="about.html">Courseworks</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Project
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="bm.html">Gender Pay Gap</a>
+    </li>
+    <li>
+      <a href="epi.html">Gun-ownership and Homicides</a>
+    </li>
+    <li>
+      <a href="sas.html">Heart Disease Risk</a>
+    </li>
+    <li>
+      <a href="rct.html">Prasinezumab Phase III Design</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="contact.html">Contact</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<title>
+Jun Zhai - Health Insurance Prediction
+</title>
+<p></br></p>
+<div id="health-insurance-prediction" class="section level3">
+<h3>Health Insurance Prediction</h3>
+<p>Using Machine Learning methods to predict health insurance with Kaggle dataset <a href="https://www.kaggle.com/mirichoi0218/insurance">Medical Cost Personal Dataset</a> </br></p>
+<p>Below is the r code and outputs for this project.</p>
+<div id="summary-the-data" class="section level4">
+<h4>1.1 Summary the data</h4>
+<div class="Rtable1"><table class="Rtable1-zebra">
+<thead>
+<tr>
+<th class='rowlabel firstrow lastrow'></th>
+<th class='firstrow lastrow'><span class='stratlabel'>female<br><span class='stratn'>(n=662)</span></span></th>
+<th class='firstrow lastrow'><span class='stratlabel'>male<br><span class='stratn'>(n=676)</span></span></th>
+<th class='firstrow lastrow'><span class='stratlabel'>Overall<br><span class='stratn'>(n=1338)</span></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class='rowlabel firstrow'><span class='varlabel'>age</span></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+</tr>
+<tr>
+<td class='rowlabel'>Mean (SD)</td>
+<td>39.5 (14.1)</td>
+<td>38.9 (14.1)</td>
+<td>39.2 (14.0)</td>
+</tr>
+<tr>
+<td class='rowlabel lastrow'>Median [Min, Max]</td>
+<td class='lastrow'>40.0 [18.0, 64.0]</td>
+<td class='lastrow'>39.0 [18.0, 64.0]</td>
+<td class='lastrow'>39.0 [18.0, 64.0]</td>
+</tr>
+<tr>
+<td class='rowlabel firstrow'><span class='varlabel'>bmi</span></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+</tr>
+<tr>
+<td class='rowlabel'>Mean (SD)</td>
+<td>30.4 (6.05)</td>
+<td>30.9 (6.14)</td>
+<td>30.7 (6.10)</td>
+</tr>
+<tr>
+<td class='rowlabel lastrow'>Median [Min, Max]</td>
+<td class='lastrow'>30.1 [16.8, 48.1]</td>
+<td class='lastrow'>30.7 [16.0, 53.1]</td>
+<td class='lastrow'>30.4 [16.0, 53.1]</td>
+</tr>
+<tr>
+<td class='rowlabel firstrow'><span class='varlabel'>charges</span></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+</tr>
+<tr>
+<td class='rowlabel'>Mean (SD)</td>
+<td>12600 (11100)</td>
+<td>14000 (13000)</td>
+<td>13300 (12100)</td>
+</tr>
+<tr>
+<td class='rowlabel lastrow'>Median [Min, Max]</td>
+<td class='lastrow'>9410 [1610, 63800]</td>
+<td class='lastrow'>9370 [1120, 62600]</td>
+<td class='lastrow'>9380 [1120, 63800]</td>
+</tr>
+<tr>
+<td class='rowlabel firstrow'><span class='varlabel'>children</span></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+</tr>
+<tr>
+<td class='rowlabel'>Mean (SD)</td>
+<td>1.07 (1.19)</td>
+<td>1.12 (1.22)</td>
+<td>1.09 (1.21)</td>
+</tr>
+<tr>
+<td class='rowlabel lastrow'>Median [Min, Max]</td>
+<td class='lastrow'>1.00 [0.00, 5.00]</td>
+<td class='lastrow'>1.00 [0.00, 5.00]</td>
+<td class='lastrow'>1.00 [0.00, 5.00]</td>
+</tr>
+<tr>
+<td class='rowlabel firstrow'><span class='varlabel'>region</span></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+</tr>
+<tr>
+<td class='rowlabel'>northeast</td>
+<td>161 (24.3%)</td>
+<td>163 (24.1%)</td>
+<td>324 (24.2%)</td>
+</tr>
+<tr>
+<td class='rowlabel'>northwest</td>
+<td>164 (24.8%)</td>
+<td>161 (23.8%)</td>
+<td>325 (24.3%)</td>
+</tr>
+<tr>
+<td class='rowlabel'>southeast</td>
+<td>175 (26.4%)</td>
+<td>189 (28.0%)</td>
+<td>364 (27.2%)</td>
+</tr>
+<tr>
+<td class='rowlabel lastrow'>southwest</td>
+<td class='lastrow'>162 (24.5%)</td>
+<td class='lastrow'>163 (24.1%)</td>
+<td class='lastrow'>325 (24.3%)</td>
+</tr>
+<tr>
+<td class='rowlabel firstrow'><span class='varlabel'>smoker</span></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+</tr>
+<tr>
+<td class='rowlabel'>no</td>
+<td>547 (82.6%)</td>
+<td>517 (76.5%)</td>
+<td>1064 (79.5%)</td>
+</tr>
+<tr>
+<td class='rowlabel lastrow'>yes</td>
+<td class='lastrow'>115 (17.4%)</td>
+<td class='lastrow'>159 (23.5%)</td>
+<td class='lastrow'>274 (20.5%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="check-distribution-of-continuous-variables" class="section level4">
+<h4>1.2 Check distribution of continuous variables</h4>
+<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
+##   method from   
+##   +.gg   ggplot2</code></pre>
+<p><img src="insurance_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Charges is not normal. Age &amp; charges, Ages &amp; bmi have linear trend.</p>
+</div>
+<div id="check-correlation" class="section level4">
+<h4>1.3 Check correlation</h4>
+<p><img src="insurance_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Charges and smoker has great correlation.</p>
+</div>
+<div id="boxplot-for-categorical-variables" class="section level4">
+<h4>1.4 Boxplot for categorical variables</h4>
+<p><img src="insurance_files/figure-html/unnamed-chunk-5-1.png" width="672" /><img src="insurance_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p>We can see that charges between different sex/children/region doesn’t differ much, but smoker has significantly greater charge than non-smoker.</p>
+</div>
+<div id="scatter-plot-for-continuous-variables" class="section level4">
+<h4>1.5 Scatter plot for continuous variables</h4>
+<p><img src="insurance_files/figure-html/unnamed-chunk-6-1.png" width="672" /><img src="insurance_files/figure-html/unnamed-chunk-6-2.png" width="672" /><img src="insurance_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<p>First we transform the charges to help discovering trends in scatter plot. Through 1.4, we find that smoker is the only categorical variable affecting charges, so we take smoker as group. From scatter plot, we can see charges increase when bmi and age increase.</p>
+</div>
+<div id="comparing-models" class="section level4">
+<h4>2.1 Comparing models</h4>
+<p><img src="insurance_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>GBM is the best model, with low RMSE, RAE and high R-square.</p>
+</div>
+<div id="gradient-boosting-model" class="section level4">
+<h4>2.2 Gradient Boosting Model</h4>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">shrinkage</th>
+<th align="right">interaction.depth</th>
+<th align="right">n.minobsinnode</th>
+<th align="right">n.trees</th>
+<th align="right">RMSE</th>
+<th align="right">Rsquared</th>
+<th align="right">MAE</th>
+<th align="right">RMSESD</th>
+<th align="right">RsquaredSD</th>
+<th align="right">MAESD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="right">0.1</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">50</td>
+<td align="right">6202.871</td>
+<td align="right">0.7470729</td>
+<td align="right">4344.856</td>
+<td align="right">466.0288</td>
+<td align="right">0.0361775</td>
+<td align="right">233.6819</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td align="right">0.1</td>
+<td align="right">2</td>
+<td align="right">10</td>
+<td align="right">50</td>
+<td align="right">4575.118</td>
+<td align="right">0.8583197</td>
+<td align="right">2684.192</td>
+<td align="right">550.3909</td>
+<td align="right">0.0367435</td>
+<td align="right">249.6802</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td align="right">0.1</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">50</td>
+<td align="right">4496.837</td>
+<td align="right">0.8611048</td>
+<td align="right">2543.797</td>
+<td align="right">547.2287</td>
+<td align="right">0.0365041</td>
+<td align="right">221.2431</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td align="right">0.1</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">100</td>
+<td align="right">6010.974</td>
+<td align="right">0.7556568</td>
+<td align="right">4244.440</td>
+<td align="right">431.1665</td>
+<td align="right">0.0365351</td>
+<td align="right">212.8096</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td align="right">0.1</td>
+<td align="right">2</td>
+<td align="right">10</td>
+<td align="right">100</td>
+<td align="right">4488.067</td>
+<td align="right">0.8610988</td>
+<td align="right">2501.074</td>
+<td align="right">554.1310</td>
+<td align="right">0.0365671</td>
+<td align="right">230.1176</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td align="right">0.1</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">100</td>
+<td align="right">4505.104</td>
+<td align="right">0.8598198</td>
+<td align="right">2497.941</td>
+<td align="right">537.7534</td>
+<td align="right">0.0360447</td>
+<td align="right">232.0640</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td align="right">0.1</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">150</td>
+<td align="right">6016.216</td>
+<td align="right">0.7549992</td>
+<td align="right">4274.771</td>
+<td align="right">428.4892</td>
+<td align="right">0.0366560</td>
+<td align="right">219.9383</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td align="right">0.1</td>
+<td align="right">2</td>
+<td align="right">10</td>
+<td align="right">150</td>
+<td align="right">4484.331</td>
+<td align="right">0.8610549</td>
+<td align="right">2464.148</td>
+<td align="right">546.0455</td>
+<td align="right">0.0359785</td>
+<td align="right">232.0796</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td align="right">0.1</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">150</td>
+<td align="right">4536.843</td>
+<td align="right">0.8577026</td>
+<td align="right">2513.076</td>
+<td align="right">534.6219</td>
+<td align="right">0.0362243</td>
+<td align="right">247.5379</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">n.trees</th>
+<th align="right">interaction.depth</th>
+<th align="right">shrinkage</th>
+<th align="right">n.minobsinnode</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+<td align="right">150</td>
+<td align="right">2</td>
+<td align="right">0.1</td>
+<td align="right">10</td>
+</tr>
+</tbody>
+</table>
+<p><img src="insurance_files/figure-html/unnamed-chunk-9-1.png" width="672" /><img src="insurance_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<pre><code>##                             var     rel.inf
+## smokeryes             smokeryes 69.14964303
+## bmi                         bmi 16.51329971
+## age                         age 12.74887643
+## children               children  1.09206572
+## regionsouthwest regionsouthwest  0.18552035
+## regionsoutheast regionsoutheast  0.15771228
+## sexmale                 sexmale  0.10379114
+## regionnorthwest regionnorthwest  0.04909134</code></pre>
+</div>
+<div id="decision-tree" class="section level4">
+<h4>2.3 Decision Tree</h4>
+<p><img src="insurance_files/figure-html/unnamed-chunk-10-1.png" width="672" /><img src="insurance_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<p>Best Tree depth is 4. In 80% nonsmokers, elder tend to have higher charges; In 20% smokers, people with higher bmi tends to have higher charges.</p>
+</div>
+<div id="black-box" class="section level4">
+<h4>2.4 Black-box</h4>
+<p><img src="insurance_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>The most important variable is smoker. The less important variables are age and bmi. Region, children and sex contribute minimally to charges.</p>
+</div>
+</div>
+
+
+<hr />
+<p style="text-align:center; font-size:6pt; font-family: Verdana; line-height: 0.5">
+  Created by Jun Zhai with R
+</p>
+<p style="text-align:center; font-size:5pt; font-family: Verdana; line-height: 0.5">
+  <script language="Javascript">
+document.write("Last Updated on: " + document.lastModified +"");
+</SCRIPT>
+</p>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>
