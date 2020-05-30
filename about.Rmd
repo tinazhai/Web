@@ -16,9 +16,9 @@ output:
 ### Graduate
 
 #### Courseworks
-- Probability  
-- Biostatistical Methods  
-- Epidemiology  
+- Biostatistical Methods 
+- Data Science  
+- Epidemiology   
 - Statistical Inference
 - SAS Programming
 - Randomized Clinical Trials
