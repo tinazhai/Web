@@ -14,25 +14,32 @@ output:
 
 ### Education
 **Columbia Univeristy**  
-Aug 2019 ~ May 2021 &emsp; Master of Science, Biostatistics                                                                                                                
+Aug 2019 ~ May 2021 &emsp; Master of Science, Biostatistics    
 **Southeast Univeristy**  
 Aug 2015 ~ June 2019 &emsp; Bachelor of Engineering, Pharmaceutical Engineering   
+**UCLA**
+Jun 2017 ~ Aug 2017 &emsp; Psychology, Psychbiology  
+
 </br>
 
 ### Work Experience  
-**AXA Tianping P&C Co. LTD**  
+**AXA**  
 May 2020 ~ Present &emsp; Data Science Intern  
 
-**Pfizer China Inc.**							           	            	               
+**Pfizer**							           	            	               
 Aug 2018 ~ Dec 2018 &emsp; Medical Affairs Intern   
 
 **SAI Med Partners LLC**					           	                                       
 Jan 2018 ~ Feb 2018 &emsp; Research Analyst Intern  
+
+**Nanjing Qinying Software Technology Co. LTD**                   
+Feb 2017 ~ Dec 2017 &emsp; Product Manager   
+
 </br>
 
 ### Leadership & Activities  
-**Nanjing Qinying Software Technology Co. LTD**                   
-Feb 2017 ~ Dec 2017 &emsp; Product Manager   				 				                               
+**Columbia COVID-19 Student Service Corps**  
+Feb 2020 ~ Apr 2020 &emsp; Student Volunteer  
 
 **SEU Career Center**	 
 Sep 2016 ~ Jun 2017 &emsp; New Media Operation  	
@@ -43,7 +50,7 @@ Sep 2015 ~ Jun 2019 &emsp; Association Assistant
 
 ### Skills & Interests   
 **Technical**    
-R; SAS; C++; LaTeX; Python; Microsoft Office; Adobe Photoshop; Adobe Lightroom     
+R; Python; SAS; SQL; C++; LaTeX; Microsoft Office; Adobe Photoshop; Adobe Lightroom     
 **Language**   
 Mandarin; English  
 **Interests**   

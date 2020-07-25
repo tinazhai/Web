@@ -23,7 +23,7 @@ output:
 - SAS Programming
 - Randomized Clinical Trials
 
-👉 [**Graduate transcript**](./Jan eTranscript.pdf)
+👉 [**Graduate transcript**](./July_eTranscript.pdf)
 
 </br>
 
