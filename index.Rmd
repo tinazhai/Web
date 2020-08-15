@@ -16,15 +16,15 @@ output:
 **Columbia Univeristy**  
 Aug 2019 ~ May 2021 &emsp; Master of Science, Biostatistics    
 **Southeast Univeristy**  
-Aug 2015 ~ June 2019 &emsp; Bachelor of Engineering, Pharmaceutical Engineering   
-**UCLA**
+Aug 2015 ~ June 2019 &emsp; Bachelor of Engineering, Pharmaceutical Engineering    
+**UCLA**  
 Jun 2017 ~ Aug 2017 &emsp; Psychology, Psychbiology  
 
 </br>
 
 ### Work Experience  
 **AXA**  
-May 2020 ~ Present &emsp; Data Science Intern  
+May 2020 ~ Aug 2020 &emsp; Data Science Intern  
 
 **Pfizer**							           	            	               
 Aug 2018 ~ Dec 2018 &emsp; Medical Affairs Intern   
@@ -57,7 +57,7 @@ Mandarin; English
 Photography; Handcrafts   
 </br>
 
-👉 **Full [CV](./Jun Zhai Resume.pdf)**
+👉 **Full [CV](./Jun Zhai Resume EN.pdf)**
 
 </br>
 </br>
