@@ -5,11 +5,13 @@ navbar:
     - icon: fa-github fa-lg
       href: https://github.com/tinazhai/
     - icon: fa-linkedin fa-lg
-      href: https://www.linkedin.com/in/jun-zhai-a22803158/
+      href: https://www.linkedin.com/in/jun-z-a22803158/
   title: "Jun Zhai"
   right:
-    - text: "Resume"
+    - text: "Home"
       href: index.html
+    - text: "Resume"
+      href: resume.html
     - text: "Courseworks"
       href: about.html
     - text: "Project"

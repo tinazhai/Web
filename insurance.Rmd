@@ -34,8 +34,8 @@ library(caretEnsemble)
 
 ```{r}
 
-dat=read.csv("C:/Users/tina_/Documents/Study/Data Mining/insurance.csv")
-dat2=read.csv("C:/Users/tina_/Documents/Study/Data Mining/insurance.csv")
+dat=read.csv("C:/Users/tina_/Documents/Study/Self-Learning/Data Mining/insurance.csv")
+dat2=read.csv("C:/Users/tina_/Documents/Study/Self-Learning/Data Mining/insurance.csv")
 ```
 #### 1.1 Summary the data
 ```{r}
