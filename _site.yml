@@ -25,6 +25,8 @@ navbar:
           href: insurance.html
         - text: "Heart Disease Risk"
           href: sas.html
+        - text: "Phase III Design"
+          href: rct.html
     - text: "Contact"
       href: contact.html
 
