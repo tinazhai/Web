@@ -22,7 +22,7 @@ output:
 - Statistical Inference
 - Clinical Trials Design
 
-👉 [**Graduate transcript**](./July_eTranscript.pdf)
+👉 [**Graduate transcript**](./transcript.pdf)
 
 </br>
 
