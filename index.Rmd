@@ -39,7 +39,7 @@ jnj <- sprintf(
 pfizer2 <- sprintf(
    '<table><tbody>
       <tr>
-        <td><img src="./pfizer.png" width="80" height="80" alt="pfizer"></td>
+        <td><img src="./pfizer.png" width="80" height="40" alt="pfizer"></td>
       </tr>
         <td><p>Statistical Programmer Intern</p></td>
     </tbody></table>')
@@ -55,7 +55,7 @@ axa <- sprintf(
 pfizer1 <- sprintf(
    '<table><tbody>
       <tr>
-        <td><img src="./pfizer.png" width="80" height="80" alt="pfizer"></td>
+        <td><img src="./pfizer.png" width="80" height="40" alt="pfizer"></td>
       </tr>
         <td><p>Medical Affairs Intern</p></td>
     </tbody></table>')
