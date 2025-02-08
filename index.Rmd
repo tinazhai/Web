@@ -88,6 +88,6 @@ timevis(data, width=900, height=400)
 
 ## Education 
 
-![](edu.PNG)
+![](education.png)
 
 
