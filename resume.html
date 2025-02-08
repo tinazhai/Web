@@ -15,18 +15,25 @@
 
 <title>Jun Zhai - Resume</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 
 
@@ -93,33 +100,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 61px;
+  padding-top: 60px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h2 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h3 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h4 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h5 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h6 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .dropdown-submenu {
   position: relative;
@@ -238,63 +245,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -304,22 +254,12 @@ div.tocify {
 <div class="container-fluid main-container">
 
 
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -330,13 +270,13 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li>
   <a href="https://github.com/tinazhai/">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.linkedin.com/in/jun-z-a22803158/">
-    <span class="fas fa-linkedin fa-lg"></span>
+    <span class="fa fa-linkedin fa-lg"></span>
      
   </a>
 </li>
@@ -348,35 +288,20 @@ div.tocify {
 <li>
   <a href="resume.html">Resume</a>
 </li>
-<li>
-  <a href="about.html">Courseworks</a>
-</li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Project
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="bm.html">Gender Pay Gap</a>
+      <a href="https://pharmasug.com.cn/resources/2024/paper/Pharmasug-China-2024-DV10004_Final_Paper.pdf">pharmaSUG China 2024</a>
     </li>
     <li>
-      <a href="epi.html">Gun-ownership and Homicides</a>
-    </li>
-    <li>
-      <a href="insurance.html">Health Insurance Prediction</a>
-    </li>
-    <li>
-      <a href="sas.html">Heart Disease Risk</a>
-    </li>
-    <li>
-      <a href="rct.html">Phase III Design</a>
+      <a href="https://cran.r-project.org/web/packages/admiralvaccine/index.html">admiralvaccines</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="contact.html">Contact</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -391,57 +316,7 @@ div.tocify {
 </div>
 
 
-<p><br />
-</p>
-<div id="education" class="section level3">
-<h3>Education</h3>
-<p><strong>Columbia Univeristy</strong><br />
-Aug 2019 ~ May 2021   Master of Science, Biostatistics<br />
-<strong>Southeast Univeristy</strong><br />
-Aug 2015 ~ June 2019   Bachelor of Engineering, Pharmaceutical Engineering<br />
-<strong>UCLA</strong><br />
-Jun 2017 ~ Aug 2017   Psychology, Psychbiology</p>
-<p></br></p>
-</div>
-<div id="work-experience" class="section level3">
-<h3>Work Experience</h3>
-<p><strong>Pfizer</strong><br />
-Sep 2020 ~ Dec 2020   Statistical Programmer Intern</p>
-<p><strong>AXA</strong><br />
-May 2020 ~ Aug 2020   Data Science Intern</p>
-<p><strong>Pfizer</strong><br />
-Aug 2018 ~ Dec 2018   Medical Affairs Intern</p>
-<p><strong>SAI Med Partners LLC</strong><br />
-Jan 2018 ~ Feb 2018   Research Analyst Intern</p>
-<p><strong>Nanjing Qinying Software Technology Co. LTD</strong><br />
-Feb 2017 ~ Dec 2017   Product Manager</p>
-<p></br></p>
-</div>
-<div id="leadership-activities" class="section level3">
-<h3>Leadership &amp; Activities</h3>
-<p><strong>Columbia COVID-19 Student Service Corps</strong><br />
-Feb 2020 ~ Apr 2020   Student Volunteer</p>
-<p><strong>SEU Career Center</strong><br />
-Sep 2016 ~ Jun 2017   New Media Operation</p>
-<p><strong>SEU Psychology Association</strong><br />
-Sep 2015 ~ Jun 2019   Association Assistant<br />
-</br></p>
-</div>
-<div id="skills-interests" class="section level3">
-<h3>Skills &amp; Interests</h3>
-<p><strong>Technical</strong><br />
-R; Python; SAS; SQL; C++; LaTeX; Microsoft Office; Adobe Photoshop; Adobe Lightroom<br />
-<strong>Language</strong><br />
-Mandarin; English<br />
-<strong>Interests</strong><br />
-Photography; Handcrafts<br />
-</br></p>
-<p>👉 <strong>Full <a href="./Jun%20Zhai%20Resume%20EN.pdf">CV</a></strong></p>
-</br> </br>
-<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
-
-</div>
-</div>
+<embed src="./CV.pdf" type="application/pdf"   height="600px" width="900px">
 
 
 <hr />
@@ -456,8 +331,6 @@ document.write("Last Updated on: " + document.lastModified +"");
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -490,32 +363,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3,h4",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 
 </body>

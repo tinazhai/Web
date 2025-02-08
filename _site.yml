@@ -12,28 +12,15 @@ navbar:
       href: index.html
     - text: "Resume"
       href: resume.html
-    - text: "Courseworks"
-      href: about.html
     - text: "Project"
-      href: project.html
       menu:
-        - text: "Gender Pay Gap"
-          href: bm.html
-        - text: "Gun-ownership and Homicides"
-          href: epi.html
-        - text: "Health Insurance Prediction"
-          href: insurance.html
-        - text: "Heart Disease Risk"
-          href: sas.html
-        - text: "Phase III Design"
-          href: rct.html
-    - text: "Contact"
-      href: contact.html
+        - text: "pharmaSUG China 2024"
+          href: https://pharmasug.com.cn/resources/2024/paper/Pharmasug-China-2024-DV10004_Final_Paper.pdf
+        - text: "admiralvaccines"
+          href: https://cran.r-project.org/web/packages/admiralvaccine/index.html
 
 output:
   html_document:
     template: template.html
     theme: sandstone
     css: 'styles.css'
-
-    

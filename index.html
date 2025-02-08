@@ -14,15 +14,30 @@
 
 <title>Jun Zhai</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet" />
+<script src="site_libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script>
+<link href="site_libs/timeline-0.4/timevis.css" rel="stylesheet" />
+<script src="site_libs/timevis-binding-2.1.0/timevis.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 
 
@@ -89,33 +104,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 61px;
+  padding-top: 60px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h2 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h3 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h4 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h5 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .section h6 {
-  padding-top: 66px;
-  margin-top: -66px;
+  padding-top: px;
+  margin-top: -px;
 }
 .dropdown-submenu {
   position: relative;
@@ -248,7 +263,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -277,35 +292,20 @@ $(document).ready(function () {
 <li>
   <a href="resume.html">Resume</a>
 </li>
-<li>
-  <a href="about.html">Courseworks</a>
-</li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Project
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="bm.html">Gender Pay Gap</a>
+      <a href="https://pharmasug.com.cn/resources/2024/paper/Pharmasug-China-2024-DV10004_Final_Paper.pdf">pharmaSUG China 2024</a>
     </li>
     <li>
-      <a href="epi.html">Gun-ownership and Homicides</a>
-    </li>
-    <li>
-      <a href="insurance.html">Health Insurance Prediction</a>
-    </li>
-    <li>
-      <a href="sas.html">Heart Disease Risk</a>
-    </li>
-    <li>
-      <a href="rct.html">Prasinezumab Phase III Design</a>
+      <a href="https://cran.r-project.org/web/packages/admiralvaccine/index.html">admiralvaccines</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="contact.html">Contact</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -321,14 +321,20 @@ $(document).ready(function () {
 
 
 <div id="section" class="section level1 tabset tabset-fade">
-<h1></h1>
-<div id="education" class="section level2">
-<h2>Education</h2>
-<p><img src="Slide1.PNG" /></p>
-</div>
+<h1 class="tabset tabset-fade"></h1>
 <div id="work" class="section level2">
 <h2>Work</h2>
-<p><img src="Slide2.PNG" /> <img src="Slide3.PNG" /> <img src="Slide4.PNG" /> <img src="Slide5.PNG" /> <img src="Slide6.PNG" /></p>
+<div id="htmlwidget-30aad57f98b7f4a1961c" class="timevis html-widget" style="width:900px;height:400px;">
+<div class="btn-group zoom-menu">
+<button type="button" class="btn btn-default btn-lg zoom-in" title="Zoom in">+</button>
+<button type="button" class="btn btn-default btn-lg zoom-out" title="Zoom out">-</button>
+</div>
+</div>
+<script type="application/json" data-for="htmlwidget-30aad57f98b7f4a1961c">{"x":{"items":[{"id":"1","content":"<table><tbody>\n      <tr>\n        <td><img src=\"./jnj.png\" width=\"64\" height=\"40\" alt=\"jnj\"><\/td>\n      <\/tr>\n      <tr>\n        <td><p>Statistical Programmer -> Experienced Statistical Programmer I<\/p><\/td>\n      <\/tr>\n      <tr>\n        <td><li>COVID-19/RSV/EBOLA Vaccine<\/li><\/td>\n      <\/tr>\n      <tr>\n        <td><li>Simponi®<\/li><\/td>\n      <\/tr>\n      <tr>\n        <td><li>Icotrokinra®<\/li><\/td>\n      <\/tr>\n    <\/tbody><\/table>","start":"2021-07-01","end":"2025-02-08","style":"border-color: lightgray; background-color: #EDE3E7"},{"id":"2","content":"<table><tbody>\n      <tr>\n        <td><img src=\"./pfizer.png\" width=\"80\" height=\"80\" alt=\"pfizer\"><\/td>\n      <\/tr>\n        <td><p>Statistical Programmer Intern<\/p><\/td>\n    <\/tbody><\/table>","start":"2020-09-01","style":"border-color: lightgray; background-color: whitesmoke"},{"id":"3","content":"<table><tbody>\n      <tr>\n        <td><img src=\"./axa.png\" width=\"40\" height=\"40\" alt=\"axa\"><\/td>\n      <\/tr>\n        <td><p>Data Science Intern<\/p><\/td>\n    <\/tbody><\/table>","start":"2020-05-01","style":"border-color: lightgray; background-color: whitesmoke"},{"id":"4","content":"<table><tbody>\n      <tr>\n        <td><img src=\"./pfizer.png\" width=\"80\" height=\"80\" alt=\"pfizer\"><\/td>\n      <\/tr>\n        <td><p>Medical Affairs Intern<\/p><\/td>\n    <\/tbody><\/table>","start":"2018-08-01","style":"border-color: lightgray; background-color: whitesmoke"}],"groups":null,"showZoom":true,"zoomFactor":0.5,"fit":true,"options":[],"height":400,"timezone":null,"api":[]},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="education" class="section level2">
+<h2>Education</h2>
+<p><img src="Slide1.png" /></p>
 </div>
 </div>
 

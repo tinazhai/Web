@@ -3,65 +3,8 @@ pagetitle: Jun Zhai - Resume
 author: "Jun Zhai"
 output: 
   html_document:
-    toc: true
-    toc_float:    
-      toc_collapsed: true
-    toc_depth: 4
     theme: sandstone
 
 ---
-\
 
-### Education
-**Columbia Univeristy**  
-Aug 2019 ~ May 2021 &emsp; Master of Science, Biostatistics    
-**Southeast Univeristy**  
-Aug 2015 ~ June 2019 &emsp; Bachelor of Engineering, Pharmaceutical Engineering    
-**UCLA**  
-Jun 2017 ~ Aug 2017 &emsp; Psychology, Psychbiology  
-
-</br>
-
-### Work Experience  
-**Pfizer**  
-Sep 2020 ~ Dec 2020 &emsp; Statistical Programmer Intern
-
-**AXA**  
-May 2020 ~ Aug 2020 &emsp; Data Science Intern  
-
-**Pfizer**							           	            	               
-Aug 2018 ~ Dec 2018 &emsp; Medical Affairs Intern   
-
-**SAI Med Partners LLC**					           	                                       
-Jan 2018 ~ Feb 2018 &emsp; Research Analyst Intern  
-
-**Nanjing Qinying Software Technology Co. LTD**                   
-Feb 2017 ~ Dec 2017 &emsp; Product Manager   
-
-</br>
-
-### Leadership & Activities  
-**Columbia COVID-19 Student Service Corps**  
-Feb 2020 ~ Apr 2020 &emsp; Student Volunteer  
-
-**SEU Career Center**	 
-Sep 2016 ~ Jun 2017 &emsp; New Media Operation  	
-
-**SEU Psychology Association**  
-Sep 2015 ~ Jun 2019 &emsp; Association Assistant       
-</br>
-
-### Skills & Interests   
-**Technical**    
-R; Python; SAS; SQL; C++; LaTeX; Microsoft Office; Adobe Photoshop; Adobe Lightroom     
-**Language**   
-Mandarin; English  
-**Interests**   
-Photography; Handcrafts   
-</br>
-
-👉 **Full [CV](./Jun Zhai Resume EN.pdf)**
-
-</br>
-</br>
-<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+<embed src="./CV.pdf" type="application/pdf"   height="600px" width="900px">
