@@ -26,13 +26,13 @@ jnj <- sprintf(
         <td><p>Statistical Programmer -> Experienced Statistical Programmer I</p></td>
       </tr>
       <tr>
-        <td><li>COVID-19/RSV/EBOLA Vaccine</li></td>
+        <td><li>COVID-19/RSV/EBOLA/ExPEC Vaccine</li></td>
       </tr>
       <tr>
         <td><li>Simponi®</li></td>
       </tr>
       <tr>
-        <td><li>Icotrokinra®</li></td>
+        <td><li>Icotrokinra</li></td>
       </tr>
     </tbody></table>')
 
