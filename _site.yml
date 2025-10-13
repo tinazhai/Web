@@ -14,6 +14,8 @@ navbar:
       href: resume.html
     - text: "Project"
       menu:
+        - text: "pharmaSUG China 2025"
+          href: https://pharmasug.com.cn/resources/2024/2025-08/Pharmasug-China-2025-SA110.pdf
         - text: "pharmaSUG China 2024"
           href: https://pharmasug.com.cn/resources/2024/paper/Pharmasug-China-2024-DV10004_Final_Paper.pdf
         - text: "admiralvaccines"
